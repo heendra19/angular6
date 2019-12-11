@@ -17,27 +17,25 @@
             <h3 class="box-title">Upload Area File</h3>
           </div>
         </div>
-        <form id="form" class="form-horizontal" action="#"
-              method="post" enctype="multipart/form-data" >
+        <form #uploadForm="ngForm" id="form" class="form-horizontal" >
           <div class="form-body">
             <div class="form-group">
               <label class="control-label col-md-3" for="input-type" >Upload Type</label>
               <div class="col-md-9">
-                <select  id="input-type" name="input-type" class="form-control">
-                  <option>
-                  </option>
+                <select  id="input-type" name="input-type" class="form-control" required [(ngModel)]="uploadModel.asset">
+                  <option  *ngFor="let asset of assets" value="{{asset.value}}">{{asset.name}}</option>
                 </select>
               </div>
             </div>
             <div class="form-group">
               <label class="control-label col-md-3" for="file">Upload File</label>
               <div class="col-md-9">
-                <input id="file" type="file" class="form-control" name="file" />
+                <input id="file" type="file" class="form-control" name="file" required [(ngModel)]="uploadModel.file" />
               </div>
             </div>
           </div>
           <div class="col-sm-offset-3 col-sm-5">
-            <button type="submit" id="btnUpload" class="btn btn-primary" value="Upload">Upload</button>
+            <button type="submit" id="btnUpload" class="btn btn-primary" value="Upload" [disabled]="uploadModel.asset == null || uploadModel.asset == 'default'">Upload</button>
           </div>
         </form>
       </div>
